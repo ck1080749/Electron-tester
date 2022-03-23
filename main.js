@@ -34,6 +34,10 @@ function createWindow () {
     const dest = fs.writeFileSync("./targetWrite.txt",title)
   })
 
+  mainWindow.on('close',(e)=>{
+    console.log('I do not want to be closed')
+  })
+
   const menu = Menu.buildFromTemplate([
     {
       label: app.name,
@@ -54,6 +58,16 @@ function createWindow () {
 
   mainWindow.loadFile('index.html')
   //mainWindow.webContents.openDevTools()
+
+  // mainWindow.onbeforeunload = (e) => {
+  //   console.log('I do not want to be closed')
+    
+  //   // Unlike usual browsers that a message box will be prompted to users, returning
+  //   // a non-void value will silently cancel the close.
+  //   // It is recommended to use the dialog API to let the user confirm closing the
+  //   // application.
+  //   e.returnValue = false // equivalent to `return false` but not recommended
+  // }
 }
 
 
