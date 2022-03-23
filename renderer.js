@@ -27,3 +27,28 @@ setButton.addEventListener('click', () => {
     const title = titleInput.value
     window.electronAPI.writeFile(title)
 });
+
+const NOTIFICATION_TITLE = 'Title'
+const NOTIFICATION_BODY = 'Notification from the Renderer process. Click to log to console.'
+const CLICK_MESSAGE = 'Notification clicked!'
+
+document.getElementById("btn3").addEventListener('click',()=>{
+  new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY }).onclick = () => window.electronAPI.toBackendConsole(CLICK_MESSAGE)
+})
+
+function timer(){
+  let time = new Date()
+
+    check(time)
+
+    setTimeout(() => {
+        timer()
+    }, 1000)
+}
+
+function check(d){
+  //window.electronAPI.toBackendConsole(d.toString())
+  document.getElementById('timestamp').innerText = d.toTimeString()
+}
+
+timer()
